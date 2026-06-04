@@ -16,13 +16,16 @@ void Room::parseRoom(string room, string tileset) {
     rm >> st;
     // cout << st << endl;
     string current = "";
+    int pos = 0;
     for(int i = 0; i < st.length(); i++) {
         if(st[i] == ',') {
-            Tile* t = new Tile(tileset, stoi(current), i * 16, 0);
+            cout << i*16 << endl;
+            Tile* t = new Tile(tileset, stoi(current), pos * 16, 0);
             tiles.push_back(t);
             // cout << "comma!" << endl;
             current = "";
             // i++;
+            pos++;
         } else {
             current += st[i];
             // cout << current << endl;

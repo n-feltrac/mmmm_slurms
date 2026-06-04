@@ -8,7 +8,7 @@ Tile::Tile(string tex, int tileNum, int posX, int posY) {
     rectSourceSprite = IntRect(tileNum*16, 0, spriteHeight, spriteWidth);
     sprite.setTexture(texture);
     sprite.setTextureRect(rectSourceSprite);
-    // sprite.setOrigin(0, 0);
+    sprite.setOrigin(0, 0);
     position = Vector2f(posX, posY); // need to call constructor when setting vector2f coords for x AND y
     sprite.setPosition(position); // also set position in constructor and include as parameters
     // sprite.scale(1, 1); // this and position should be parameters in constructor

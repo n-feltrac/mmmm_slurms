@@ -25,7 +25,7 @@ int main() {
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
+            if (event.type == Event::Closed/*  || Keyboard::isKeyPressed(Keyboard::Z) */) {
                 window.close();
             }
         }
