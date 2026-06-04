@@ -8,7 +8,7 @@ using namespace std;
 
 class Tile : GameObject {
     public:
-        Tile(string tex, int tileNum);
+        Tile(string tex, int tileNum, int posX, int posY);
         void update(RenderWindow &window);
 
     protected:

@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-Tile::Tile(string tex, int tileNum) {
+Tile::Tile(string tex, int tileNum, int posX, int posY) {
     spriteWidth = 16;
     spriteHeight = 16;
     // spriteWidthTotal = totalWidth; //ehhhh should be fine i wont use a tile out of bounds
