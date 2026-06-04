@@ -18,9 +18,9 @@ int main() {
     RenderWindow window(VideoMode(WINWIDTH, WINHEIGHT), "gugga");
 
     // Player* zero = new Player(0.3, "zero_idle.png", 34, 41, 204);
-    // Tile* til = new Tile("tiles.png", 3);
+    // Tile* til = new Tile("tiles.png", 3, 16, 0);
 
-    Room* rm = new Room("rooms/one.rm", "tiles.png", vector<int>(0));
+    Room* rm = new Room("rooms/one.rm", "tiles.png");
 
     while (window.isOpen()) {
         Event event;
