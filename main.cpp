@@ -20,7 +20,7 @@ int main() {
     // Player* zero = new Player(0.3, "zero_idle.png", 34, 41, 204);
     // Tile* til = new Tile("tiles.png", 3, 16, 0);
 
-    Room* rm = new Room("rooms/one.rm", "tiles.png");
+    Room* rm = new Room("rooms/one.rm", "tilescut.png");
 
     while (window.isOpen()) {
         Event event;
