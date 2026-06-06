@@ -39,7 +39,12 @@ void Player::update(RenderWindow &window) {
     Dy += gravity;
     
     position.x += Dx;
-    position.y += Dy;
+    if(position.y + Dy >= 100) { // arbitrary floor for now
+        position.y = 100;
+        canJump = true;
+    } else {
+        position.y += Dy;
+    }
     sprite.setPosition(position.x, position.y);
     window.draw(sprite);
 }
@@ -52,8 +57,11 @@ void Player::move(int direction) { // direction is 1 for right or -1 for left
 
 void Player::jump() {
     if(canJump) {
+        cout << "can jump" << endl;
         Dy = -jumpHeight;
         canJump = false;
         falling = true;
+    } else {
+        cout << "cant jump??" << endl;
     }
 }

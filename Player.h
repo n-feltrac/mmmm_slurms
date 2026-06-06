@@ -17,13 +17,13 @@ class Player : GameObject {
         int spriteWidth; // 16x16 tile
         int spriteWidthTotal; // total spritesheet size
         //already has a position vector2f
-        float speed = 0.2;
+        float speed = 0.04;
         float Dx = 0; // x velocity
         float Dy = 0; // y vel
         bool canJump = true;
         bool falling = false;
-        int jumpHeight = 1;
-        int gravity = 0;
+        float jumpHeight = 0.05;
+        float gravity = 0.00004;
         
 };
 
