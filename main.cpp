@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Room.h"
 #include "Tile.h"
+#include "Player.h"
 
 using namespace sf;
 using namespace std;
@@ -17,10 +18,10 @@ using namespace std;
 int main() {
     RenderWindow window(VideoMode(WINWIDTH, WINHEIGHT), "gugga");
 
-    // Player* zero = new Player(0.3, "zero_idle.png", 34, 41, 204);
+    Player* rock = new Player();
     // Tile* til = new Tile("tiles.png", 3, 16, 0);
 
-    Room* rm = new Room("rooms/one.rm", "tilescut.png");
+    // Room* rm = new Room("rooms/one.rm", "tilescut.png");
 
     while (window.isOpen()) {
         Event event;
@@ -33,9 +34,9 @@ int main() {
 
         // til->update(window);
 
-        rm->update(window);
+        // rm->update(window);
 
-        // zero->update(window);
+        rock->update(window);
 
         window.display();
     }
