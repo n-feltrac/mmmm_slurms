@@ -9,7 +9,7 @@ Player::Player() {
     sprite.setTexture(texture);
     sprite.setTextureRect(rectSourceSprite);
     sprite.setOrigin(0, 0);
-    position = Vector2f(0, 0); // need to call constructor when setting vector2f coords for x AND y
+    position = Vector2f(50, 50); // need to call constructor when setting vector2f coords for x AND y
     sprite.setPosition(position); // also set position in constructor and include as parameters
     // sprite.scale(1, 1); // this and position should be parameters in constructor
     hitbox = sprite.getGlobalBounds();
@@ -24,6 +24,8 @@ void Player::update(RenderWindow &window) {
         move(-1);
     } else if(Keyboard::isKeyPressed(Keyboard::Right)) {
         move(1);
+    } else {
+        Dx = 0;
     }
     // jump
     if(Keyboard::isKeyPressed(Keyboard::Up)) {
@@ -33,6 +35,8 @@ void Player::update(RenderWindow &window) {
             if(Dy < 0) { // and y velocity is going up,
                 Dy = 0; // limit height of jump
             }
+        } else {
+            canJump = true;
         }
     }
     // setting position
@@ -41,27 +45,28 @@ void Player::update(RenderWindow &window) {
     position.x += Dx;
     if(position.y + Dy >= 100) { // arbitrary floor for now
         position.y = 100;
-        canJump = true;
+        Dy = 0;
+        if(!Keyboard::isKeyPressed(Keyboard::Up)) {
+            canJump = true;
+        }
     } else {
         position.y += Dy;
     }
     sprite.setPosition(position.x, position.y);
     window.draw(sprite);
 }
-
+/////////////////I NEED EVERYTHING TO BE 60FPS because the speed keeps varying and its annoying me
 void Player::move(int direction) { // direction is 1 for right or -1 for left
     Dx = speed * direction; // ?
-    cout << Dx << endl;
+    // cout << Dx << endl;
     // sprite.setPosition(position.x + Dx, position.y);
 }
 
 void Player::jump() {
     if(canJump) {
-        cout << "can jump" << endl;
+        // cout << "can jump" << endl;
         Dy = -jumpHeight;
         canJump = false;
         falling = true;
-    } else {
-        cout << "cant jump??" << endl;
     }
 }
