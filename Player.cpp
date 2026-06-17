@@ -16,7 +16,7 @@ Player::Player() {
 
 }
 
-void Player::update(RenderWindow &window) {
+void Player::update(RenderWindow &window, Clock clk) {
     position = sprite.getPosition();
 
     // movement
@@ -52,7 +52,11 @@ void Player::update(RenderWindow &window) {
     } else {
         position.y += Dy;
     }
-    sprite.setPosition(position.x, position.y);
+
+    if(clk.getElapsedTime().asMicroseconds() >= 1.0) {
+        sprite.setPosition(position.x, position.y);
+    }
+
     window.draw(sprite);
 }
 /////////////////I NEED EVERYTHING TO BE 60FPS because the speed keeps varying and its annoying me

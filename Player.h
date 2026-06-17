@@ -9,7 +9,7 @@ using namespace std;
 class Player : GameObject {
     public:
         Player();
-        void update(RenderWindow &window);
+        void update(RenderWindow &window, Clock clk);
         void move(int direction);
         void jump();
     protected:
@@ -22,7 +22,7 @@ class Player : GameObject {
         float Dy = 0; // y vel
         bool canJump = true;
         bool falling = false;
-        float jumpHeight = 0.5;
+        float jumpHeight = 0.75;
         float gravity = 0.004;
         
 };

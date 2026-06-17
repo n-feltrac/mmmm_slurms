@@ -13,15 +13,17 @@ using namespace std;
 #define WINWIDTH  256
 #define WINHEIGHT 224
 
-// g++ -c main.cpp GameObject.cpp Tile.cpp Room.cpp && g++ main.o GameObject.o Tile.o Room.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system && ./sfml-app
+// g++ -c main.cpp GameObject.cpp Tile.cpp Room.cpp Player.cpp && g++ main.o GameObject.o Tile.o Room.o Player.o -lsfml-graphics -lsfml-window -lsfml-system && ./a.out
 
 int main() {
     RenderWindow window(VideoMode(WINWIDTH, WINHEIGHT), "gugga");
 
+    Clock rClock;
+
     Player* rock = new Player();
     // Tile* til = new Tile("tiles.png", 3, 16, 0);
 
-    // Room* rm = new Room("rooms/one.rm", "tilescut.png");
+    Room* rm = new Room("rooms/one.rm", "tilescut.png");
 
     while (window.isOpen()) {
         Event event;
@@ -32,11 +34,15 @@ int main() {
         }
         window.clear();
 
+
+        if(rClock.getElapsedTime().asMicroseconds() >= 1.0) {
+            rClock.restart();
+        }
+
         // til->update(window);
+        rm->update(window);
 
-        // rm->update(window);
-
-        rock->update(window);
+        rock->update(window, rClock);
 
         window.display();
     }
