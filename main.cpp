@@ -25,6 +25,8 @@ int main() {
 
     Room* rm = new Room("rooms/one.rm", "tilescut.png");
 
+    window.setFramerateLimit(60);
+
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
@@ -35,14 +37,14 @@ int main() {
         window.clear();
 
 
-        if(rClock.getElapsedTime().asMicroseconds() >= 1.0) {
-            rClock.restart();
-        }
+        // if(rClock.getElapsedTime().asMicroseconds() >= 1.0) {
+        //     rClock.restart();
+        // }
 
         // til->update(window);
         rm->update(window);
 
-        rock->update(window, rClock);
+        rock->update(window, rClock, rm);
 
         window.display();
     }

@@ -10,10 +10,13 @@ class Tile : GameObject {
     public:
         Tile(string tex, int tileNum, int posX, int posY);
         void update(RenderWindow &window);
-    protected:
         int spriteHeight; // kinda obsolete
         int spriteWidth; // 16x16 tile
         int spriteWidthTotal; // total spritesheet size
+        FloatRect getHitBox();
+        int spriteNum;
+    protected:
+        
 };
 
 #endif

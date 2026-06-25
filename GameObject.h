@@ -18,13 +18,14 @@ class GameObject {
         IntRect getSpriteRect();
         void setPosition(Vector2f newPosition);
         virtual ~GameObject() { cout << "destroyed" << endl; };
-    protected:
+        FloatRect hitbox;
         Texture texture;
         IntRect rectSourceSprite;
         Sprite sprite;
         Clock clock;
         Vector2f position;
-        FloatRect hitbox;
+    protected:
+        
 };
 
 #endif

@@ -13,8 +13,16 @@ Tile::Tile(string tex, int tileNum, int posX, int posY) {
     sprite.setPosition(position); // also set position in constructor and include as parameters
     // sprite.scale(1, 1); // this and position should be parameters in constructor
     hitbox = sprite.getGlobalBounds();
+    spriteNum = tileNum;
+    cout << sprite.getGlobalBounds().left << " " << sprite.getGlobalBounds().top << " " << sprite.getGlobalBounds().width << " " << sprite.getGlobalBounds().height << " and " << hitbox.getPosition().x << " " << hitbox.getPosition().y << endl;
+    // cout << spriteNum << endl;
 }
 
 void Tile::update(RenderWindow &window) {
     window.draw(sprite);
+}
+
+FloatRect Tile::getHitBox()
+{
+    return hitbox;
 }

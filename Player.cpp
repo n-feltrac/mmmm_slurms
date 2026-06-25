@@ -16,7 +16,7 @@ Player::Player() {
 
 }
 
-void Player::update(RenderWindow &window, Clock clk) {
+void Player::update(RenderWindow &window, Clock clk, Room* rm) {
     position = sprite.getPosition();
 
     // movement
@@ -43,6 +43,11 @@ void Player::update(RenderWindow &window, Clock clk) {
     Dy += gravity;
     
     position.x += Dx;
+    for(Tile* t : rm->tiles) {
+        if(hitbox.intersects(t->getHitBox()) && t->spriteNum >= 1) {
+            cout << "touching a thing" << endl;
+        }
+    }
     if(position.y + Dy >= 100) { // arbitrary floor for now
         position.y = 100;
         Dy = 0;
@@ -53,9 +58,9 @@ void Player::update(RenderWindow &window, Clock clk) {
         position.y += Dy;
     }
 
-    if(clk.getElapsedTime().asMicroseconds() >= 1.0) {
+    // if(clk.getElapsedTime().asMicroseconds() >= 0.2) {
         sprite.setPosition(position.x, position.y);
-    }
+    // }
 
     window.draw(sprite);
 }

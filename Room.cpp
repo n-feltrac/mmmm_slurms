@@ -21,10 +21,10 @@ void Room::parseRoom(string room, string tileset) {
     while(std::getline(rm, st)) {
         for(int i = 0; i < st.length(); i++) {
             if(st[i] == ',') {
-                cout << current << endl;
+                // cout << current << endl;
                 Tile* t = new Tile(tileset, stoi(current), posX * 16, posY * 16);
                 tiles.push_back(t);
-                cout << posX << " and " << posY << endl;
+                // cout << posX << " and " << posY << endl;
                 current = "";
                 // i++;
                 posX++;
@@ -36,7 +36,7 @@ void Room::parseRoom(string room, string tileset) {
                 // cout << current << endl;
             }
         }
-        cout << "end of line!" << endl;
+        // cout << "end of line!" << endl;
         posX = 0;
         posY++;
     }
