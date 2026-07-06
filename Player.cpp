@@ -45,7 +45,15 @@ void Player::update(RenderWindow &window, Clock clk, Room* rm) {
     position.x += Dx;
     for(Tile* t : rm->tiles) {
         if(hitbox.intersects(t->getHitBox()) && t->spriteNum >= 1) {
-            cout << "touching a thing" << endl;
+            cout << "touching a thing: " << t->spriteNum << endl; // this is always 1, even if you run into other blocks. t.spritenum is determined by first touch for some reason?
+            // DO COLLISION DETECTION here
+            //left and right (x)
+            // if(position.x >)
+            // if less than right and more than left, CHECK DIRECTION and push back that way, set x to right() or left()
+            //up and down (y)
+            // check if JUMPING, no, jumping is true until touching floor, how will we know if floor is touched?
+            // if jumping and canjump is no
+            // check if falling or not, if falling then player is above, if jumping then player is below
         }
     }
     if(position.y + Dy >= 100) { // arbitrary floor for now
