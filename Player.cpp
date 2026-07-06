@@ -5,10 +5,10 @@ Player::Player() {
     spriteHeight = 24;
     // spriteWidthTotal = totalWidth; //ehhhh should be fine i wont use a tile out of bounds
     texture.loadFromFile("mm.png");
-    rectSourceSprite = IntRect(1, 21, spriteHeight, spriteWidth);
+    rectSourceSprite = IntRect(324, 21, spriteHeight, spriteWidth);
     sprite.setTexture(texture);
     sprite.setTextureRect(rectSourceSprite);
-    sprite.setOrigin(0, 0);
+    sprite.setOrigin(spriteWidth/2, spriteHeight/2); // so scaling the sprite for directions doesnt screw up
     position = Vector2f(50, 50); // need to call constructor when setting vector2f coords for x AND y
     sprite.setPosition(position); // also set position in constructor and include as parameters
     // sprite.scale(1, 1); // this and position should be parameters in constructor
@@ -45,7 +45,8 @@ void Player::update(RenderWindow &window, Clock clk, Room* rm) {
     position.x += Dx;
     for(Tile* t : rm->tiles) {
         if(hitbox.intersects(t->getHitBox()) && t->spriteNum >= 1) {
-            cout << "touching a thing: " << t->spriteNum << endl; // this is always 1, even if you run into other blocks. t.spritenum is determined by first touch for some reason?
+            // cout << "touching a thing: " << t->spriteNum << endl; // t.spritenum is determined by first touch for some reason?
+            t->updateSprite("placeholder.png");
             // DO COLLISION DETECTION here
             //left and right (x)
             // if(position.x >)
@@ -59,22 +60,30 @@ void Player::update(RenderWindow &window, Clock clk, Room* rm) {
     if(position.y + Dy >= 100) { // arbitrary floor for now
         position.y = 100;
         Dy = 0;
+        falling = false; // ?? is this where i need to do this? i think so
         if(!Keyboard::isKeyPressed(Keyboard::Up)) {
             canJump = true;
         }
     } else {
-        position.y += Dy;
+        position.y += Dy; // keep falling
     }
+
+
 
     // if(clk.getElapsedTime().asMicroseconds() >= 0.2) {
         sprite.setPosition(position.x, position.y);
+        hitbox = sprite.getGlobalBounds(); // PLEASE ALWAYS REMEMBER TO UPDATE THIS!!!!!!!!
     // }
 
     window.draw(sprite);
 }
-/////////////////I NEED EVERYTHING TO BE 60FPS because the speed keeps varying and its annoying me
+
 void Player::move(int direction) { // direction is 1 for right or -1 for left
     Dx = speed * direction; // ?
+    if(dir != direction) {
+        sprite.scale(-1, 1);
+        dir = direction;
+    }
     // cout << Dx << endl;
     // sprite.setPosition(position.x + Dx, position.y);
 }

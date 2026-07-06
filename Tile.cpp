@@ -14,7 +14,7 @@ Tile::Tile(string tex, int tileNum, int posX, int posY) {
     // sprite.scale(1, 1); // this and position should be parameters in constructor
     hitbox = sprite.getGlobalBounds();
     spriteNum = tileNum;
-    cout << sprite.getGlobalBounds().left << " " << sprite.getGlobalBounds().top << " " << sprite.getGlobalBounds().width << " " << sprite.getGlobalBounds().height << " and " << hitbox.getPosition().x << " " << hitbox.getPosition().y << endl;
+    // cout << sprite.getGlobalBounds().left << " " << sprite.getGlobalBounds().top << " " << sprite.getGlobalBounds().width << " " << sprite.getGlobalBounds().height << " and " << hitbox.getPosition().x << " " << hitbox.getPosition().y << endl;
     // cout << spriteNum << endl;
 }
 
@@ -22,7 +22,13 @@ void Tile::update(RenderWindow &window) {
     window.draw(sprite);
 }
 
-FloatRect Tile::getHitBox()
-{
+FloatRect Tile::getHitBox() {
     return hitbox;
+}
+
+void Tile::updateSprite(string path) {
+    texture.loadFromFile(path);
+    rectSourceSprite = IntRect(0, 0, spriteHeight, spriteWidth);
+    sprite.setTexture(texture);
+    sprite.setTextureRect(rectSourceSprite);
 }

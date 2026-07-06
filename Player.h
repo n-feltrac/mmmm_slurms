@@ -25,6 +25,7 @@ class Player : GameObject {
         bool falling = false;
         float jumpHeight = 8;
         float gravity = 0.5;
+        int dir = 1;
         
 };
 

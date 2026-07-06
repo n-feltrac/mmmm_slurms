@@ -15,6 +15,7 @@ class Tile : GameObject {
         int spriteWidthTotal; // total spritesheet size
         FloatRect getHitBox();
         int spriteNum;
+        void updateSprite(string path);
     protected:
         
 };
