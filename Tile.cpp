@@ -32,3 +32,17 @@ void Tile::updateSprite(string path) {
     sprite.setTexture(texture);
     sprite.setTextureRect(rectSourceSprite);
 }
+
+// left, right, top, or bottom
+float Tile::returnBound(string dir) {
+    if(dir == "left") {
+        return sprite.getGlobalBounds().left;
+    } else if(dir == "right") {
+        return sprite.getGlobalBounds().left + spriteWidth;
+    } else if(dir == "top") {
+        return sprite.getGlobalBounds().top;
+    } else if(dir == "bottom") {
+        return sprite.getGlobalBounds().top + spriteHeight;
+    }
+    return 0;
+}

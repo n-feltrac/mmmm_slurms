@@ -24,8 +24,6 @@ class GameObject {
         Sprite sprite;
         Clock clock;
         Vector2f position;
-    protected:
-        
 };
 
 #endif

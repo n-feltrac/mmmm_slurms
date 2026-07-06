@@ -43,30 +43,54 @@ void Player::update(RenderWindow &window, Clock clk, Room* rm) {
     Dy += gravity;
     
     position.x += Dx;
-    for(Tile* t : rm->tiles) {
-        if(hitbox.intersects(t->getHitBox()) && t->spriteNum >= 1) {
-            // cout << "touching a thing: " << t->spriteNum << endl; // t.spritenum is determined by first touch for some reason?
-            t->updateSprite("placeholder.png");
-            // DO COLLISION DETECTION here
-            //left and right (x)
-            // if(position.x >)
+    for(int i = 0; i < rm->tiles.size(); i++) {
+        if(hitbox.intersects(rm->tiles[i]->getHitBox()) && rm->tiles[i]->spriteNum >= 1) {
+            
+            rm->tiles[i]->updateSprite("placeholder.png");
+            // DO COLLISION DETECTION here WITH HITBOX
+            // left and right (x)
+            // only check one side is inside, since mm sprite is bigger than 16px
+            // if rightside greater than lefttile, and less than righttile, push back to left
+            // if leftside greater than lefttile, and less than righttile, push back to right
+
+ 
+            if(hitbox.left > rm->tiles[i]->returnBound("left") && hitbox.left < rm->tiles[i]->returnBound("right")) {
+                position.x = rm->tiles[i]->returnBound("right") + spriteWidth/2;
+            } else if(hitbox.left + spriteWidth > rm->tiles[i]->returnBound("left") && hitbox.left + spriteWidth < rm->tiles[i]->returnBound("right")) {
+                position.x = rm->tiles[i]->returnBound("left") - spriteWidth/2;
+            }
+
             // if less than right and more than left, CHECK DIRECTION and push back that way, set x to right() or left()
-            //up and down (y)
+            // up and down (y)
             // check if JUMPING, no, jumping is true until touching floor, how will we know if floor is touched?
             // if jumping and canjump is no
             // check if falling or not, if falling then player is above, if jumping then player is below
+            // if(position.y > rm->tiles[i]->returnBound("top") && position.y < rm->tiles[i]->returnBound("bottom")) {
+            //     if(falling == true) { // falling and hit ground, need to be on top of tile
+            //         position.y = rm->tiles[i]->returnBound("top");
+            //         falling = false;
+            //         if(!Keyboard::isKeyPressed(Keyboard::Up)) {
+            //             canJump = true;
+            //         }
+            //     } else if(falling == false) { // jumping, falling is false, need to stay on bottom
+            //         position.y = rm->tiles[i]->returnBound("bottom");
+            //         canJump = false;
+            //         falling = true;
+            //         Dy = 0;
+            //     }
+            // } else {
+            //     position.y += Dy; // keep falling
+            // }
         }
     }
-    if(position.y + Dy >= 100) { // arbitrary floor for now
-        position.y = 100;
-        Dy = 0;
-        falling = false; // ?? is this where i need to do this? i think so
-        if(!Keyboard::isKeyPressed(Keyboard::Up)) {
-            canJump = true;
-        }
-    } else {
-        position.y += Dy; // keep falling
-    }
+    // if(position.y + Dy >= 100) { // arbitrary floor for now
+    //     position.y = 100;
+    //     Dy = 0;
+    //     falling = false; // ?? is this where i need to do this? i think so
+    //     if(!Keyboard::isKeyPressed(Keyboard::Up)) {
+    //         canJump = true;
+    //     }
+    // } 
 
 
 

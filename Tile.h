@@ -16,6 +16,7 @@ class Tile : GameObject {
         FloatRect getHitBox();
         int spriteNum;
         void updateSprite(string path);
+        float returnBound(string dir);
     protected:
         
 };
